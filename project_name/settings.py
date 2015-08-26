@@ -25,8 +25,6 @@ SECRET_KEY = "{{ secret_key }}"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 
 # Application definition
 
@@ -56,6 +54,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
+        'TEMPLATE_DEBUG': DEBUG,
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
