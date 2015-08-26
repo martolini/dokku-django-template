@@ -1,43 +1,29 @@
-# Heroku Django Starter Template
+# Dokku Django Starter Template
 
-An utterly fantastic project starter template for Django 1.8.
+Starter template for pushing projects to dokku
 
 ## Features
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise
-- Enhancements to Django's database functionality via django-postgrespool and dj-database-url
+Staticfiles served by whitenoise
+Uses gunicorn
+Database environment variable, if not present use local sqlite3. Change to your needs.
 
-## How to Use
+## Tutorial
 
-To use this project, follow these steps:
-
-1. Create your working environment.
+1. Create your virtual environment
 2. Install Django (`$ pip install django`)
-3. Create a new project using this template
+3. django-admin.py startproject --template {url} --name=myproject
 
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
+## Deploying
 
     $ git init
     $ git add -A
     $ git commit -m "Initial commit"
 
-    $ heroku create
-    $ git push heroku master
+    $ git remote add dokku dokku@yourip.net:myproject
+    $ git push dokku master
 
-    $ heroku run python manage.py migrate
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [django-postgrespool](https://warehouse.python.org/project/django-postgrespool/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+    On your dokku server:
+    $ dokku postgresql:create mydb
+    $ dokku postgresql:link myapp mydb
+    $ dokku run myproject python manage.py migrate
